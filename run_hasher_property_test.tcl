@@ -1,11 +1,10 @@
-set ghw_list {2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32}
-set rounds_list {2 3 4 5 6 7 8 9 10}
-
 foreach ghr $ghw_list {
   foreach rounds $rounds_list {
     puts "\n=== Running GHR_WIDTH=$ghr, ROUNDS=$rounds ==="
 
-    reset_project -all
+    remove_design -all
+    remove_file -all
+
     set_option design_mode rtl
     set_option language_mode sv
     set_option define "GHR_WIDTH=$ghr,ROUNDS=$rounds"
@@ -25,5 +24,6 @@ foreach ghr $ghw_list {
     report_stats -property -all > "$output_dir/stats.txt"
   }
 }
+exit
 
 exit
